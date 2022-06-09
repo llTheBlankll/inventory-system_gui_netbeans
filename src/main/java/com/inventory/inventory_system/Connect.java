@@ -24,8 +24,4 @@ public class Connect {
             return null;
         }
     }
-    
-    public static Boolean isConnectionValid(java.sql.Connection connection) throws Exception {
-        return connection.isValid(30);
-    }
 }
