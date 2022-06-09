@@ -418,25 +418,25 @@ public class Home extends javax.swing.JFrame {
         Functions.clearRowsInTable((DefaultTableModel) ProductList_Table.getModel());
         // Set ProductList_Table Rows
         try (Connection con = Connect.getMySQLConnection()) {
+            assert con != null;
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM products");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                String pname, pcode, pquantity, pprice;
-                pname = rs.getString("product_name");
-                pcode = rs.getString("product_code");
-                pquantity = rs.getString("product_quantity");
-                pprice = rs.getString("product_quantity");
+                String product_name, product_code, product_quantity, product_price;
+                product_name = rs.getString("product_name");
+                product_code = rs.getString("product_code");
+                product_quantity = rs.getString("product_quantity");
+                product_price = rs.getString("product_quantity");
 
-                String[] result = { pname, pcode, pquantity, pprice };
+                String[] result = { product_name, product_code, product_quantity, product_price };
 
                 Functions.insertRowToTable((DefaultTableModel) this.ProductList_Table.getModel(), result);
             }
 
             //Close result set because operation is not allowed until ResultSet is not closed.
             rs.close();
-            con.close();
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             Functions.showMessageDialog(e.getMessage(), "error");
         }
     }//GEN-LAST:event_formWindowGainedFocus
@@ -476,9 +476,7 @@ public class Home extends javax.swing.JFrame {
                 Functions.showMessageDialog(ex.getMessage(), "error");
             }
             Home hm = new Home();
-            hm.show();
-            
-            
+            hm.setVisible(true);
         });
         
         

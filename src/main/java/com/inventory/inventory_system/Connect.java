@@ -19,6 +19,8 @@ public class Connect {
             con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost/inventory_system", username, password);
             return con;
         } catch (SQLException | ClassNotFoundException e) {
+            Functions.showMessageDialog(e.getMessage(), "error");
+            System.exit(e.hashCode());
             return null;
         }
     }

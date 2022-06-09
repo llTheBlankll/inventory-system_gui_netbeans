@@ -4,6 +4,7 @@
  */
 package com.inventory.inventory_system;
 
+import javax.swing.*;
 import java.sql.*;
 import java.awt.event.WindowEvent;
 
@@ -181,12 +182,12 @@ public class addProduct extends javax.swing.JFrame {
             try (Connection con = Connect.getMySQLConnection()) {
                 PreparedStatement stmt = con.prepareStatement("INSERT INTO products (product_name, product_code, product_quantity, product_price) VALUES (?, ?, ?, ?)");
                 stmt.setString(1, productName_Textfield.getText());
-                stmt.setInt(2, Integer.valueOf(productCode_Textfield.getText()));
-                stmt.setInt(3, Integer.valueOf(productQuantity_Textfield.getText()));
-                stmt.setInt(4, Integer.valueOf(productPrice_Textfield.getText()));
+                stmt.setInt(2, Integer.parseInt(productCode_Textfield.getText()));
+                stmt.setInt(3, Integer.parseInt(productQuantity_Textfield.getText()));
+                stmt.setInt(4, Integer.parseInt(productPrice_Textfield.getText()));
                 
                 // execute() only returns true if the stmt have ResultSet
-                if (stmt.execute() == false) {
+                if (!stmt.execute()) {
                     Functions.showMessageDialog(productName_Textfield.getText() + " successfully saved!", "info");
                     productName_Textfield.setText("");
                     productCode_Textfield.setText("");
@@ -195,7 +196,6 @@ public class addProduct extends javax.swing.JFrame {
                 }
                 
                 stmt.close();
-                con.close();
             } catch (SQLException e) {
                 Functions.showMessageDialog(e.getMessage(), "error");
             }
@@ -218,13 +218,7 @@ public class addProduct extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException ex) {
             java.util.logging.Logger.getLogger(addProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
