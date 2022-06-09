@@ -165,7 +165,7 @@ public class addProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void goToUpdate_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goToUpdate_LabelMouseClicked
-        new updateProduct().show();
+        new updateProduct().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_goToUpdate_LabelMouseClicked
 
@@ -205,7 +205,7 @@ public class addProduct extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -224,9 +224,7 @@ public class addProduct extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new addProduct().setVisible(true);
-        });
+        java.awt.EventQueue.invokeLater(() -> new addProduct().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
